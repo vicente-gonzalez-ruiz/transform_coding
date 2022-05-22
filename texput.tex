@@ -1,0 +1,98 @@
+% Emacs, this is -*-latex-*-
+\title{Transform Coding}
+
+\maketitle
+\tableofcontents
+
+\section{Energy (information) concentration}
+%{{{
+
+\href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{Transform
+  coding} can exploit
+\href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{correlation}
+in \href{https://en.wikipedia.org/wiki/Signal}{signals} to concentrate
+the
+\href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
+in a subset of transformed elements called \emph{coefficients}. After
+the transform, quantization of the signal is more
+effective\footnote{for the same bit-rate, the lossy compression ratios
+are higher.} when the energy of the signal is accumulated in an small
+number of coefficients because we can dedicate more bits to encode the
+more energetic ones.
+
+%}}}
+
+\section{Matrix form of the transform}
+%{{{
+
+All linear\footnote{Non-linear transform are also possible, but their
+mathematical treatment is more complicated.} transforms can be
+described as a
+\href{https://en.wikipedia.org/wiki/Matrix_multiplication}{matrix-vector
+  product}~\cite{strang4linear}
+\begin{equation}
+  \mathbf{y} = \mathbf{K}\mathbf{x},
+  \label{eq:forward_transform_matrix_form}
+\end{equation}
+where $\mathbf{x}$ is the input signal, $\mathbf{K}$ is the analysis
+transform matrix, and $\mathbf{y}$ is the output decomposition. Notice
+that
+\begin{equation}
+  {\mathbf{y}}_i = \langle {\mathbf{K}}_i, {\mathbf{x}}_i\rangle,
+\end{equation}
+where ${\mathbf{K}}_i$ is the $i$-th row of $\mathbf{K}$, and
+$\langle\cdot,\cdot\rangle$ denotes the
+\href{https://mathworld.wolfram.com/InnerProduct.html}{inner
+  product}. This basically means that ${\mathbf{y}}_i$ is proportional to the
+\href{https://en.wikipedia.org/wiki/Similarity_(geometry)}{similarity}
+between the input signal $\mathbf{x}$ and the
+\href{https://en.wikipedia.org/wiki/Finite_impulse_response}{taps} of
+the \href{https://en.wikipedia.org/wiki/Digital_filter}{filter}
+${\mathbf{K}}_i$.\footnote{These
+\href{https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf}{slides}
+can help you with this key idea.} The inverse (synthesis) transform is
+computed by
+\begin{equation}
+  \mathbf{x} = {\mathbf{K}}^{-1}\mathbf{y},
+  \label{eq:backward_transform_matrix_form}
+\end{equation}
+where ${\mathbf{K}}^{-1}$ denotes to the inverse matrix of
+$\mathbf{K}$. When ${\mathbf K}$ is orthonormal, it holds that
+\begin{equation}
+  \mathbf{K}={\mathbf{K}}^{-1}={\mathbf{K}}^{\text T},
+  \label{eq:orthogonal_matrix}
+\end{equation}
+where ${\mathbf{K}}^{\text T}$ represents the transpose matrix of
+$\mathbf{K}$. Without considering scale factors,
+Eq.~\ref{eq:orthogonal_matrix} is true also for all
+\href{https://en.wikipedia.org/wiki/Orthogonality}{orthogonal}
+transforms. Orthogonal and orthonormal transforms satisfy that
+\begin{equation}
+  \langle {\mathbf{K}}_i, {\mathbf{K}}_j\rangle = 0, \forall i\neq j.
+\end{equation}
+
+%}}}
+
+\section{Transform coding gain}
+%{{{
+
+Transforms are used in signal coding to provide relative (between
+subbands) energy compaction. The capatility of a transform to
+achieve this can be estimated by the so called \emph{transform coding
+gain}~\cite{vetterli1995wavelets,sayood2017introduction} defined by
+\begin{equation}
+G = \frac{\frac{1}{N}\sum_{n=1}^N{\sigma_n^2}}{(\prod_{n=1}^N\sigma_n^2)^{\frac{1}{N}}},
+\end{equation}
+where $N$ is the number of coefficients in a block (in our case, the
+number of coefficients in a transformed pixel, i.e., $N=3$), and
+$\sigma_n^2$ is the variance of the $n$-th coefficient in the
+block. As it can be seen, $G$ is the ratio of the arithmetic mean of
+the variances of the transform coefficients to their geometric
+mean. Notice that $G$ is computed inside of a block (a pixel in the
+case of a color transform), not among blocks (pixels).
+
+%}}}
+
+\section{Resources}
+\bibliography{maths,data-compression,signal-processing,DWT,image-compression,image-processing}
+
