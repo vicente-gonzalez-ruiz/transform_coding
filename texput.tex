@@ -4,17 +4,21 @@
 \maketitle
 \tableofcontents
 
-\section{Energy (information) concentration}
+\section{Information concentration}
 %{{{
 
 \href{https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf}{Transform
   coding} can exploit
 \href{https://en.wikipedia.org/wiki/Correlation_and_dependence}{correlation}
 in \href{https://en.wikipedia.org/wiki/Signal}{signals} to concentrate
-the
-\href{https://en.wikipedia.org/wiki/Energy_(signal_processing)}{energy}
-in a subset of transformed elements called \emph{coefficients}. After
-the transform, quantization of the signal is more
+its
+\href{https://en.wikipedia.org/wiki/Information}{information}\footnote{That
+can be estimated through the
+\href{https://en.wikipedia.org/wiki/Variance}{variance} or the
+\href{https://en.wikipedia.org/wiki/Entropy}{entropy}} in a subset of
+transformed elements called \emph{coefficients}, by decorrelating the
+input samples~\cite{sayood2017introduction}. Normally, after the
+transformation, quantization of the signal is more
 effective\footnote{for the same bit-rate, the lossy compression ratios
 are higher.} when the energy of the signal is accumulated in an small
 number of coefficients because we can dedicate more bits to encode the
@@ -26,7 +30,7 @@ more energetic ones.
 %{{{
 
 All linear\footnote{Non-linear transform are also possible, but their
-mathematical treatment is more complicated.} transforms can be
+mathematical treatment is different.} transforms can be
 described as a
 \href{https://en.wikipedia.org/wiki/Matrix_multiplication}{matrix-vector
   product}~\cite{strang4linear}
@@ -35,8 +39,8 @@ described as a
   \label{eq:forward_transform_matrix_form}
 \end{equation}
 where $\mathbf{x}$ is the input signal, $\mathbf{K}$ is the analysis
-transform matrix, and $\mathbf{y}$ is the output decomposition. Notice
-that
+transform matrix, and $\mathbf{y}$ is the output decomposition. The
+coefficients are found by
 \begin{equation}
   {\mathbf{y}}_i = \langle {\mathbf{K}}_i, {\mathbf{x}}_i\rangle,
 \end{equation}
@@ -64,7 +68,7 @@ $\mathbf{K}$. When ${\mathbf K}$ is orthonormal, it holds that
 \end{equation}
 where ${\mathbf{K}}^{\text T}$ represents the transpose matrix of
 $\mathbf{K}$. Without considering scale factors,
-Eq.~\ref{eq:orthogonal_matrix} is true also for all
+Eq.~\ref{eq:orthogonal_matrix} is also true for all
 \href{https://en.wikipedia.org/wiki/Orthogonality}{orthogonal}
 transforms. Orthogonal and orthonormal transforms satisfy that
 \begin{equation}
@@ -77,8 +81,8 @@ transforms. Orthogonal and orthonormal transforms satisfy that
 %{{{
 
 Transforms are used in signal coding to provide relative (between
-subbands) energy compaction. The capatility of a transform to
-achieve this can be estimated by the so called \emph{transform coding
+subbands) energy compaction. The capatility of a transform to achieve
+this effect can be estimated by the so called \emph{transform coding
 gain}~\cite{vetterli1995wavelets,sayood2017introduction} defined by
 \begin{equation}
 G = \frac{\frac{1}{N}\sum_{n=1}^N{\sigma_n^2}}{(\prod_{n=1}^N\sigma_n^2)^{\frac{1}{N}}},
@@ -92,6 +96,32 @@ mean. Notice that $G$ is computed inside of a block (a pixel in the
 case of a color transform), not among blocks (pixels).
 
 %}}}
+
+\subsection{Block-based transform coding}
+%{{{
+
+Some transforms, such as the DCT are applied by 2D blocks which (for
+example, of $8\times 8$ pixels). This a direct consequence of that,
+usually, the transform losses compaction efficiency when the block size is
+increased (although this depends on the signal characteristics). When
+the coefficients of several blocks are considered together, they form
+a \href{https://en.wikipedia.org/wiki/Sub-band_coding}{subband}, and
+the collection of subbands, a
+\href{https://en.wikipedia.org/wiki/Discrete_wavelet_transform}{decomposition}~\cite{vetterli2014foundations},
+and the
+\href{https://en.wikipedia.org/wiki/Array_data_structure#Element_identifier_and_addressing_formulas}{index}
+of the subband is related to the
+\href{https://en.wikipedia.org/wiki/Frequency}{frequency} of the
+signal. For example, in the case of the
+\href{https://en.wikipedia.org/wiki/Digital_image}{images}, the
+position of the
+\href{https://en.wikipedia.org/wiki/Coefficient}{coefficients} in the
+subbands is related to
+\href{https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/milestones/07-DCT/block_DCT_compression.ipynb}{the
+  spatial area where the corresponding pixels are found}.
+
+%}}}
+
 
 \section{Resources}
 \bibliography{maths,data-compression,signal-processing,DWT,image-compression,image-processing}
