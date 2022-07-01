@@ -37,7 +37,7 @@
 <!-- l. 11 --><p class='noindent'><a href='https://web.stanford.edu/class/ee398a/handouts/lectures/07-TransformCoding.pdf'>Transform coding</a> can exploit <a href='https://en.wikipedia.org/wiki/Correlation_and_dependence'>correlation</a> in <a href='https://en.wikipedia.org/wiki/Signal'>signals</a> to concentrate its
 <a href='https://en.wikipedia.org/wiki/Information'>information</a><span class='footnote-mark'><a href='#fn1x0' id='fn1x0-bk'><sup class='textsuperscript'>1</sup></a></span><a id='x1-2001f1'></a>
 in a subset of transformed elements called <span class='ecti-1000'>coefficients</span>, by decorrelating the input
-samples <span class='cite'>[<a href='#Xsayood2017introduction'>2</a>]</span>. Normally, after the transformation, quantization of the signal is more
+samples <span class='cite'>[<a href='#Xsayood2017introduction'>4</a>]</span>. Normally, after the transformation, quantization <span class='cite'>[<a href='#Xvruiz__scalar_quantization'>2</a>]</span> of the signal is more
 effective<span class='footnote-mark'><a href='#fn2x0' id='fn2x0-bk'><sup class='textsuperscript'>2</sup></a></span><a id='x1-2002f2'></a>
 when the energy of the signal is accumulated in an small number of coefficients
 because we can dedicate more bits to encode the more energetic ones.
@@ -47,15 +47,15 @@ because we can dedicate more bits to encode the more energetic ones.
 </p><!-- l. 29 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='transform-coding-tc-versus-vector-quantization-vq'><span class='titlemark'>2   </span> <a id='x1-30002'></a>Transform Coding (TC) versus Vector Quantization (VQ)</h3>
-<!-- l. 32 --><p class='noindent'>Both, TC and VQ works exploiting the correlation between samples, although
+<!-- l. 32 --><p class='noindent'>Both, TC and VQ <span class='cite'>[<a href='#Xvruiz__vector_quantization'>3</a>]</span> works exploiting the correlation between samples, although
 SQ (Scalar Quantization) does not. Therefore, we can expect that the RD
 performance <span class='cite'>[<a href='#Xvruiz__information_theory'>1</a>]</span> of a (TC+SQ)-based codec should perform in the RD domain
 similarly to VQ.
-</p><!-- l. 39 --><p class='noindent'>
+</p><!-- l. 40 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='matrix-form-of-the-transform'><span class='titlemark'>3   </span> <a id='x1-40003'></a>Matrix form of the transform</h3>
-<!-- l. 42 --><p class='noindent'>All linear<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-4001f3'></a>
-transforms can be described as a <a href='https://en.wikipedia.org/wiki/Matrix_multiplication'>matrix-vector product</a> <span class='cite'>[<a href='#Xstrang4linear'>3</a>]</span> \begin {equation}  \mathbf {y} = \mathbf {K}\mathbf {x}, \label {eq:forward_transform_matrix_form}  \end {equation}
+<!-- l. 43 --><p class='noindent'>All linear<span class='footnote-mark'><a href='#fn3x0' id='fn3x0-bk'><sup class='textsuperscript'>3</sup></a></span><a id='x1-4001f3'></a>
+transforms can be described as a <a href='https://en.wikipedia.org/wiki/Matrix_multiplication'>matrix-vector product</a> <span class='cite'>[<a href='#Xstrang4linear'>5</a>]</span> \begin {equation}  \mathbf {y} = \mathbf {K}\mathbf {x}, \label {eq:forward_transform_matrix_form}  \end {equation}
 where \(\mathbf {x}\) is the input signal, \(\mathbf {K}\) is the analysis transform matrix, and \(\mathbf {y}\) is the output
 decomposition. The coefficients are found by \begin {equation}  {\mathbf {y}}_i = \langle {\mathbf {K}}_i, {\mathbf {x}}_i\rangle ,  \end {equation}
 where \({\mathbf {K}}_i\) is the \(i\)-th row of \(\mathbf {K}\), and \(\langle \cdot ,\cdot \rangle \) denotes the <a href='https://mathworld.wolfram.com/InnerProduct.html'>inner product</a>. This basically means that \({\mathbf {y}}_i\)
@@ -67,34 +67,34 @@ where \({\mathbf {K}}^{-1}\) denotes to the inverse matrix of \(\mathbf {K}\). W
 where \({\mathbf {K}}^{\text T}\) represents the transpose matrix of \(\mathbf {K}\). Without considering scale factors, Eq. <span class='ecbx-1000'>??</span>
 is also true for all <a href='https://en.wikipedia.org/wiki/Orthogonality'>orthogonal</a> transforms. Orthogonal and orthonormal transforms
 satisfy that \begin {equation}  \langle {\mathbf {K}}_i, {\mathbf {K}}_j\rangle = 0, \forall i\neq j.  \end {equation}
-</p><!-- l. 90 --><p class='noindent'>
+</p><!-- l. 91 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='transform-coding-gain'><span class='titlemark'>4   </span> <a id='x1-50004'></a>Transform coding gain</h3>
-<!-- l. 93 --><p class='noindent'>Transforms are used in signal coding to provide relative (between subbands) energy
+<!-- l. 94 --><p class='noindent'>Transforms are used in signal coding to provide relative (between subbands) energy
 compaction. The capatility of a transform to achieve this effect can be estimated by
-the so called <span class='ecti-1000'>transform coding gain</span> <span class='cite'>[<a href='#Xvetterli1995wavelets'>4</a>, <a href='#Xsayood2017introduction'>2</a>]</span> defined by \begin {equation}  G = \frac {\frac {1}{N}\sum _{n=1}^N{\sigma _n^2}}{(\prod _{n=1}^N\sigma _n^2)^{\frac {1}{N}}},  \end {equation}
+the so called <span class='ecti-1000'>transform coding gain</span> <span class='cite'>[<a href='#Xvetterli1995wavelets'>6</a>, <a href='#Xsayood2017introduction'>4</a>]</span> defined by \begin {equation}  G = \frac {\frac {1}{N}\sum _{n=1}^N{\sigma _n^2}}{(\prod _{n=1}^N\sigma _n^2)^{\frac {1}{N}}},  \end {equation}
 where \(N\) is the number of coefficients in a block (in our case, the number of coefficients
 in a transformed pixel, i.e., \(N=3\)), and \(\sigma _n^2\) is the variance of the \(n\)-th coefficient in the block.
 As it can be seen, \(G\) is the ratio of the arithmetic mean of the variances of the
 transform coefficients to their geometric mean. Notice that \(G\) is computed
 inside of a block (a pixel in the case of a color transform), not among blocks
 (pixels).
-</p><!-- l. 110 --><p class='noindent'>
+</p><!-- l. 111 --><p class='noindent'>
 </p>
                                                                   
 
                                                                   
    <h4 class='subsectionHead' id='blockbased-transform-coding'><span class='titlemark'>4.1   </span> <a id='x1-60004.1'></a>Block-based transform coding</h4>
-<!-- l. 113 --><p class='noindent'>Some transforms, such as the DCT are applied by 2D blocks which (for example, of \(8\times 8\)
+<!-- l. 114 --><p class='noindent'>Some transforms, such as the DCT are applied by 2D blocks which (for example, of \(8\times 8\)
 pixels). This a direct consequence of that, usually, the transform losses compaction
 efficiency when the block size is increased (although this depends on the signal
 characteristics). When the coefficients of several blocks are considered together,
-they form a <a href='https://en.wikipedia.org/wiki/Sub-band_coding'>subband</a>, and the collection of subbands, a <a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'>decomposition</a> <span class='cite'>[<a href='#Xvetterli2014foundations'>5</a>]</span>,
+they form a <a href='https://en.wikipedia.org/wiki/Sub-band_coding'>subband</a>, and the collection of subbands, a <a href='https://en.wikipedia.org/wiki/Discrete_wavelet_transform'>decomposition</a> <span class='cite'>[<a href='#Xvetterli2014foundations'>7</a>]</span>,
 and the <a href='https://en.wikipedia.org/wiki/Array_data_structure#Element_identifier_and_addressing_formulas'>index</a> of the subband is related to the <a href='https://en.wikipedia.org/wiki/Frequency'>frequency</a> of the signal. For
 example, in the case of the <a href='https://en.wikipedia.org/wiki/Digital_image'>images</a>, the position of the <a href='https://en.wikipedia.org/wiki/Coefficient'>coefficients</a> in the
 subbands is related to <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/milestones/07-DCT/block_DCT_compression.ipynb'>the spatial area where the corresponding pixels are
 found</a>.
-</p><!-- l. 136 --><p class='noindent'>
+</p><!-- l. 137 --><p class='noindent'>
 </p>
    <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-70005'></a>Resources</h3>
    <div class='thebibliography'>
@@ -102,27 +102,36 @@ found</a>.
  [1]<span class='bibsp'>   </span></span><a id='Xvruiz__information_theory'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/information_theory/'>Information Theory</a>.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [2]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.   <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
+ [2]<span class='bibsp'>   </span></span><a id='Xvruiz__scalar_quantization'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/scalar_quantization/'>Scalar Quantization</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [3]<span class='bibsp'>   </span></span><a id='Xvruiz__vector_quantization'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/vector_quantization/'>Vector Quantization</a>.
+   </p>
+   <p class='bibitem'><span class='biblabel'>
+ [4]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.   <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
    2017.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [3]<span class='bibsp'>   </span></span><a id='Xstrang4linear'></a>G. Strang. <a href='https://ia802906.us.archive.org/18/items/StrangG.LinearAlgebraAndItsApplications45881001/%5BStrang_G.%5D_Linear_algebra_and_its_applications%284%29%5B5881001%5D.pdf'><span class='ecti-1000'>Linear Algebra and Its Applications</span></a>. Belmont, CA: Thomson,
+ [5]<span class='bibsp'>   </span></span><a id='Xstrang4linear'></a>G. Strang. <a href='https://ia802906.us.archive.org/18/items/StrangG.LinearAlgebraAndItsApplications45881001/%5BStrang_G.%5D_Linear_algebra_and_its_applications%284%29%5B5881001%5D.pdf'><span class='ecti-1000'>Linear Algebra and Its Applications</span></a>. Belmont, CA: Thomson,
    Brooks/Cole, 2006.
    </p>
    <p class='bibitem'><span class='biblabel'>
- [4]<span class='bibsp'>   </span></span><a id='Xvetterli1995wavelets'></a>M. Vetterli  and  J. Kovačević.     <a href='http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf'><span class='ecti-1000'>Wavelets  and  Subband  Coding</span></a>.
+ [6]<span class='bibsp'>   </span></span><a id='Xvetterli1995wavelets'></a>M. Vetterli  and  J. Kovačević.     <a href='http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf'><span class='ecti-1000'>Wavelets  and  Subband  Coding</span></a>.
    Prentice-hall, 1995.
+                                                                  
+
+                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
- [5]<span class='bibsp'>   </span></span><a id='Xvetterli2014foundations'></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a href='http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf'><span class='ecti-1000'>Foundations of Signal
+ [7]<span class='bibsp'>   </span></span><a id='Xvetterli2014foundations'></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a href='http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf'><span class='ecti-1000'>Foundations of Signal
    </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
 <p id='references'><a id='Q1-1-8'></a>
    </p><div class='footnotes'><!-- l. 18 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>That can be estimated through the </span><a href='https://en.wikipedia.org/wiki/Variance'><span class='ecrm-0800'>variance</span></a> <span class='ecrm-0800'>or the </span><a href='https://en.wikipedia.org/wiki/Entropy'><span class='ecrm-0800'>entropy</span></a></p>
 <!-- l. 23 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>for the same bit-rate, the lossy compression ratios are higher.</span></p>
-<!-- l. 43 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Non-linear transform are also possible, but their mathematical treatment is different.</span></p>
-<!-- l. 67 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>These </span><a href='https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf'><span class='ecrm-0800'>slides</span></a> <span class='ecrm-0800'>can help you with this key idea.</span></p>                                                    </div>
+<!-- l. 44 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Non-linear transform are also possible, but their mathematical treatment is different.</span></p>
+<!-- l. 68 --><p class='indent'>     <span class='footnote-mark'><a href='#fn4x0-bk' id='fn4x0'><sup class='textsuperscript'>4</sup></a></span><span class='ecrm-0800'>These </span><a href='https://cseweb.ucsd.edu/classes/fa17/cse166-a/lec13.pdf'><span class='ecrm-0800'>slides</span></a> <span class='ecrm-0800'>can help you with this key idea.</span></p>                                                    </div>
  
 </body> 
 </html>

@@ -18,21 +18,22 @@ can be estimated through the
 \href{https://en.wikipedia.org/wiki/Entropy}{entropy}} in a subset of
 transformed elements called \emph{coefficients}, by decorrelating the
 input samples~\cite{sayood2017introduction}. Normally, after the
-transformation, quantization of the signal is more
-effective\footnote{for the same bit-rate, the lossy compression ratios
-are higher.} when the energy of the signal is accumulated in an small
-number of coefficients because we can dedicate more bits to encode the
-more energetic ones.
+transformation, quantization~\cite{vruiz__scalar_quantization} of the
+signal is more effective\footnote{for the same bit-rate, the lossy
+compression ratios are higher.} when the energy of the signal is
+accumulated in an small number of coefficients because we can dedicate
+more bits to encode the more energetic ones.
 
 %}}}
 
 \section{Transform Coding (TC) versus Vector Quantization (VQ)}
 %{{{
 
-Both, TC and VQ works exploiting the correlation between samples,
-although SQ (Scalar Quantization) does not. Therefore, we can expect
-that the RD performance~\cite{vruiz__information_theory} of a
-(TC+SQ)-based codec should perform in the RD domain similarly to VQ.
+Both, TC and VQ~\cite{vruiz__vector_quantization} works exploiting the
+correlation between samples, although SQ (Scalar Quantization) does
+not. Therefore, we can expect that the RD
+performance~\cite{vruiz__information_theory} of a (TC+SQ)-based codec
+should perform in the RD domain similarly to VQ.
 
 %}}}
 
@@ -134,5 +135,5 @@ subbands is related to
 
 
 \section{Resources}
-\bibliography{maths,data-compression,signal-processing,DWT,image-compression,image-processing,information_theory}
+\bibliography{maths,data-compression,signal-processing,DWT,image-compression,image-processing,information_theory,quantization}
 
