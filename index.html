@@ -27,8 +27,9 @@
 <br />    <span class='sectionToc'>2 <a href='#transform-coding-tc-versus-vector-quantization-vq' id='QQ2-1-3'>Transform Coding (TC) versus Vector Quantization (VQ)</a></span>
 <br />    <span class='sectionToc'>3 <a href='#matrix-form-of-the-transform' id='QQ2-1-4'>Matrix form of the transform</a></span>
 <br />    <span class='sectionToc'>4 <a href='#transform-coding-gain' id='QQ2-1-5'>Transform coding gain</a></span>
-<br />     <span class='subsectionToc'>4.1 <a href='#blockbased-transform-coding' id='QQ2-1-6'>Block-based transform coding</a></span>
-<br />    <span class='sectionToc'>5 <a href='#resources' id='QQ2-1-7'>Resources</a></span>
+<br />    <span class='sectionToc'>5 <a href='#blockbased-transform-coding' id='QQ2-1-6'>Block-based transform coding</a></span>
+<br />    <span class='sectionToc'>6 <a href='#some-about-ratecontrol-in-the-transform-domain' id='QQ2-1-7'>Some about rate-control in the transform domain</a></span>
+<br />    <span class='sectionToc'>7 <a href='#resources' id='QQ2-1-8'>Resources</a></span>
 <br />    <span class='sectionToc'><a href='#references'>References</a></span>
    </div>
 <!-- l. 7 --><p class='noindent'>
@@ -80,11 +81,11 @@ transform coefficients to their geometric mean. Notice that \(G\) is computed
 inside of a block (a pixel in the case of a color transform), not among blocks
 (pixels).
 </p><!-- l. 111 --><p class='noindent'>
-</p>
                                                                   
 
                                                                   
-   <h4 class='subsectionHead' id='blockbased-transform-coding'><span class='titlemark'>4.1   </span> <a id='x1-60004.1'></a>Block-based transform coding</h4>
+</p>
+   <h3 class='sectionHead' id='blockbased-transform-coding'><span class='titlemark'>5   </span> <a id='x1-60005'></a>Block-based transform coding</h3>
 <!-- l. 114 --><p class='noindent'>Some transforms, such as the DCT are applied by 2D blocks which (for example, of \(8\times 8\)
 pixels). This a direct consequence of that, usually, the transform losses compaction
 efficiency when the block size is increased (although this depends on the signal
@@ -94,9 +95,16 @@ and the <a href='https://en.wikipedia.org/wiki/Array_data_structure#Element_iden
 example, in the case of the <a href='https://en.wikipedia.org/wiki/Digital_image'>images</a>, the position of the <a href='https://en.wikipedia.org/wiki/Coefficient'>coefficients</a> in the
 subbands is related to <a href='https://github.com/Sistemas-Multimedia/Sistemas-Multimedia.github.io/blob/master/milestones/07-DCT/block_DCT_compression.ipynb'>the spatial area where the corresponding pixels are
 found</a>.
-</p><!-- l. 137 --><p class='noindent'>
+</p><!-- l. 136 --><p class='noindent'>
 </p>
-   <h3 class='sectionHead' id='resources'><span class='titlemark'>5   </span> <a id='x1-70005'></a>Resources</h3>
+   <h3 class='sectionHead' id='some-about-ratecontrol-in-the-transform-domain'><span class='titlemark'>6   </span> <a id='x1-70006'></a>Some about rate-control in the transform domain</h3>
+<!-- l. 139 --><p class='noindent'>Rate-control is mainly performed through the configuration of the quantization step
+sizes. Notice that, in general, if the transform is orthogonal and therefore the
+subbands are independent, the quantization step size of a subband should be
+inversely proportional to the subband gain.
+</p><!-- l. 147 --><p class='noindent'>
+</p>
+   <h3 class='sectionHead' id='resources'><span class='titlemark'>7   </span> <a id='x1-80007'></a>Resources</h3>
    <div class='thebibliography'>
    <p class='bibitem'><span class='biblabel'>
  [1]<span class='bibsp'>   </span></span><a id='Xvruiz__information_theory'></a>V. González-Ruiz. <a href='https://vicente-gonzalez-ruiz.github.io/information_theory/'>Information Theory</a>.
@@ -110,6 +118,9 @@ found</a>.
    <p class='bibitem'><span class='biblabel'>
  [4]<span class='bibsp'>   </span></span><a id='Xsayood2017introduction'></a>K. Sayood.   <a href='http://rahilshaikh.weebly.com/uploads/1/1/6/3/11635894/data_compression.pdf'><span class='ecti-1000'>Introduction to Data Compression</span></a>.   Morgan  Kaufmann,
    2017.
+                                                                  
+
+                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [5]<span class='bibsp'>   </span></span><a id='Xstrang4linear'></a>G. Strang. <a href='https://ia802906.us.archive.org/18/items/StrangG.LinearAlgebraAndItsApplications45881001/%5BStrang_G.%5D_Linear_algebra_and_its_applications%284%29%5B5881001%5D.pdf'><span class='ecti-1000'>Linear Algebra and Its Applications</span></a>. Belmont, CA: Thomson,
@@ -118,16 +129,13 @@ found</a>.
    <p class='bibitem'><span class='biblabel'>
  [6]<span class='bibsp'>   </span></span><a id='Xvetterli1995wavelets'></a>M. Vetterli  and  J. Kovačević.     <a href='http://waveletsandsubbandcoding.org/Repository/VetterliKovacevic95_Manuscript.pdf'><span class='ecti-1000'>Wavelets  and  Subband  Coding</span></a>.
    Prentice-hall, 1995.
-                                                                  
-
-                                                                  
    </p>
    <p class='bibitem'><span class='biblabel'>
  [7]<span class='bibsp'>   </span></span><a id='Xvetterli2014foundations'></a>M. Vetterli, J. Kovačević, and V.K. Goyal.  <a href='http://www.fourierandwavelets.org/FSP_v1.1_2014.pdf'><span class='ecti-1000'>Foundations of Signal
    </span><span class='ecti-1000'>Processing</span></a>. Cambridge University Press, 2014.
 </p>
    </div>
-<p id='references'><a id='Q1-1-8'></a>
+<p id='references'><a id='Q1-1-9'></a>
    </p><div class='footnotes'><!-- l. 18 --><p class='indent'>     <span class='footnote-mark'><a href='#fn1x0-bk' id='fn1x0'><sup class='textsuperscript'>1</sup></a></span><span class='ecrm-0800'>That can be estimated through the </span><a href='https://en.wikipedia.org/wiki/Variance'><span class='ecrm-0800'>variance</span></a> <span class='ecrm-0800'>or the </span><a href='https://en.wikipedia.org/wiki/Entropy'><span class='ecrm-0800'>entropy</span></a></p>
 <!-- l. 23 --><p class='indent'>     <span class='footnote-mark'><a href='#fn2x0-bk' id='fn2x0'><sup class='textsuperscript'>2</sup></a></span><span class='ecrm-0800'>for the same bit-rate, the lossy compression ratios are higher.</span></p>
 <!-- l. 44 --><p class='indent'>     <span class='footnote-mark'><a href='#fn3x0-bk' id='fn3x0'><sup class='textsuperscript'>3</sup></a></span><span class='ecrm-0800'>Non-linear transform are also possible, but their mathematical treatment is different.</span></p>

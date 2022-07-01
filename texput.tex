@@ -108,7 +108,7 @@ case of a color transform), not among blocks (pixels).
 
 %}}}
 
-\subsection{Block-based transform coding}
+\section{Block-based transform coding}
 %{{{
 
 Some transforms, such as the DCT are applied by 2D blocks which (for
@@ -133,6 +133,16 @@ subbands is related to
 
 %}}}
 
+\section{Some about rate-control in the transform domain}
+%{{{ 
+
+Rate-control is mainly performed through the configuration of the
+quantization step sizes. Notice that, in general, if the transform is
+orthogonal and therefore the subbands are independent, the
+quantization step size of a subband should be inversely proportional
+to the subband gain.
+
+%}}}
 
 \section{Resources}
 \bibliography{maths,data-compression,signal-processing,DWT,image-compression,image-processing,information_theory,quantization}
